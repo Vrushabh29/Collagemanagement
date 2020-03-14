@@ -18,7 +18,7 @@ include('db.php');
 include('stu_header.php'); 
 if(isset($_SESSION['roll_no'])){ 
 $roll_no = $_SESSION['roll_no'];
-	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error());
+	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$sem = $row['semister'];
 ?>
@@ -59,7 +59,7 @@ $roll_no = $_SESSION['roll_no'];
               </thead>
                 <tbody>
                <?php 
-               $query = $db->query("select * from books where semester = '$sem' ORDER BY id DESC") or die(mysqli_error());
+               $query = $db->query("select * from books where semester = '$sem' ORDER BY id DESC") or die(mysqli_error($db));
                $id = 1;
                 while($row=mysqli_fetch_array($query)) 
                 {

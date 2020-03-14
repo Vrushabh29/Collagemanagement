@@ -56,7 +56,7 @@ session_start();
                     </thead>
                     <tbody>
                         <?php
-                        $query = $db->query("select * from stu_subjects ORDER BY id DESC") or die(mysqli_error());
+                        $query = $db->query("select * from stu_subjects ORDER BY id DESC") or die(mysqli_error($db));
                         $id = 1;
                         while ($row = mysqli_fetch_array($query)) {
                             //print_r($row); die;

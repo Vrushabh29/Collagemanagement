@@ -23,7 +23,7 @@ session_start();
             $stream = $_POST['stream'];
             $sem = $_POST['semister'];
             $sub = $_POST['subject'];
-            $query = $db->query("INSERT INTO `stu_subjects`(`id`, `qualification`, `stream`, `semister`, `subject`) VALUES ('','$qual','$stream','$sem','$sub')") or die(mysqli_error());
+            $query = $db->query("INSERT INTO `stu_subjects`(`id`, `qualification`, `stream`, `semister`, `subject`) VALUES ('','$qual','$stream','$sem','$sub')") or die(mysqli_error($db));
 
             if ($query) {
                 echo "<script>alert('Successfully Updated Subject Details')</script>";

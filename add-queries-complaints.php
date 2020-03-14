@@ -18,7 +18,7 @@ include('db.php');
 include('stu_header.php'); 
 if(isset($_SESSION['roll_no'])){ 
 $roll_no = $_SESSION['roll_no'];
-	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error());
+	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$sem = $row['semister'];
 ?>
@@ -35,7 +35,7 @@ $roll_no = $_SESSION['roll_no'];
 		$stream = $_POST['stream'];
 		$sem = $_POST['semester'];
 		$queries = $_POST['queries'];
-		$query = $db->query("INSERT INTO `queries`(`id`, `roll_no`, `qualification`, `stream`, `semester`, `query`) VALUES ('','$std_id','$qual','$stream','$sem','$queries')") or die(mysqli_error());
+		$query = $db->query("INSERT INTO `queries`(`id`, `roll_no`, `qualification`, `stream`, `semester`, `query`) VALUES ('','$std_id','$qual','$stream','$sem','$queries')") or die(mysqli_error($db));
 		
 		if($query){
 			echo "<script>alert('Successfully Updated Queries...!')</script>";

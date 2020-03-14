@@ -18,7 +18,7 @@ include('db.php');
 include('faculty_header.php'); 
 if(isset($_SESSION['email_id'])){ 
 $email = $_SESSION['email_id'];
-	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$name = $row['name'];
 ?>
@@ -60,7 +60,7 @@ $email = $_SESSION['email_id'];
             <tbody>
             	<?php
 					$i=1;
-					$query = $db->query("select * from exams where uploaded_by = '$name' ORDER BY id DESC") or die(mysqli_error());
+					$query = $db->query("select * from exams where uploaded_by = '$name' ORDER BY id DESC") or die(mysqli_error($db));
 					while($row = mysqli_fetch_assoc($query)){
 						echo '<tr align="center">';
 						echo '<td>'.$i.'</td>';

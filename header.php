@@ -81,7 +81,7 @@ session_start();
 if (isset($_POST['student_login'])) { //print_r($_POST); die;
   $roll_number = $_POST['roll_no'];
   $pass = md5($_POST['password']);
-  $query = $db->query("select * from student_register where roll_no='$roll_number' and password ='$pass'") or die(mysqli_error());
+  $query = $db->query("select * from student_register where roll_no='$roll_number' and password ='$pass'") or die(mysqli_error($db));
   $result = mysqli_fetch_assoc($query); //print_r($result); die;
   if ($result) {
     $user = $result['roll_no'];
@@ -123,7 +123,7 @@ if (isset($_POST['student_login'])) { //print_r($_POST); die;
 if (isset($_POST['faculty_login'])) { //print_r($_POST); die;
   $email = $_POST['email_id'];
   $pass = md5($_POST['password']);
-  $query = $db->query("select * from faculty_register where email_id='$email' and password ='$pass'") or die(mysqli_error());
+  $query = $db->query("select * from faculty_register where email_id='$email' and password ='$pass'") or die(mysqli_error($db));
   $result = mysqli_fetch_assoc($query); //print_r($result); die;
   if ($result) {
     $user = $result['email_id'];
@@ -164,7 +164,7 @@ if (isset($_POST['faculty_login'])) { //print_r($_POST); die;
 if (isset($_POST['admin_login'])) { //print_r($_POST); die;
   $name = $_POST['user_name'];
   $pass = md5($_POST['user_pass']);
-  $query = $db->query("select * from admin where u_name='$name' and u_pass ='$pass'") or die(mysqli_error());
+  $query = $db->query("select * from admin where u_name='$name' and u_pass ='$pass'") or die(mysqli_error($db));
   $result = mysqli_fetch_assoc($query); //print_r($result); die;
   if ($result) {
     $user = $result['u_name'];

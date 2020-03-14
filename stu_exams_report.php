@@ -24,7 +24,7 @@ if(isset($_GET['ins'])){
 }
 if(isset($_SESSION['roll_no'])){ 
 	$roll_no = $_SESSION['roll_no'];
-	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error());
+	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$sem = $row['semister'];
 ?>
@@ -41,15 +41,15 @@ if(isset($_SESSION['roll_no'])){
     	<div class="col-md-8">
         	<?php
 				//Getting correct answers count by joind exam_ques and stud_ans tables
-				$crt_query = $db->query("select * from questions inner join stud_ans on questions.exam_id=stud_ans.exam_id where questions.exam_id='$exam_id' and questions.id=stud_ans.ques_id and questions.correct_ans=stud_ans.stud_ans and stud_ans.roll_no='$roll_no'") or die(mysqli_error());				
+				$crt_query = $db->query("select * from questions inner join stud_ans on questions.exam_id=stud_ans.exam_id where questions.exam_id='$exam_id' and questions.id=stud_ans.ques_id and questions.correct_ans=stud_ans.stud_ans and stud_ans.roll_no='$roll_no'") or die(mysqli_error($db));				
 				$crt_count = mysqli_num_rows($crt_query);
 				//Getting Total No. Of Questions from exams table
-				$tot_query = $db->query("select * from stud_ans where exam_id='$exam_id'") or die(mysqli_error());
+				$tot_query = $db->query("select * from stud_ans where exam_id='$exam_id'") or die(mysqli_error($db));
 				//$tot_row = mysqli_fetch_assoc($tot_ques);
 				$tot_ques = mysqli_num_rows($tot_query);
 				
 				//Getting the no. of answered and unanswered questions
-				$ans_query = $db->query("select * from stud_ans where exam_id='$exam_id' and stud_ans !='' and roll_no='$roll_no'") or die(mysqli_error());
+				$ans_query = $db->query("select * from stud_ans where exam_id='$exam_id' and stud_ans !='' and roll_no='$roll_no'") or die(mysqli_error($db));
 				$ans_cnt = mysqli_num_rows($ans_query);
 				$unans_cnt = $tot_ques - $ans_cnt;
 				//Getting the Subject Details
@@ -58,10 +58,10 @@ if(isset($_SESSION['roll_no'])){
 				 
 				//Inserting the exam result into database
 				//Remove Duplicates
-				$dup_query = $db->query("select * from exam_report where exam_id='$exam_id' and roll_no='$roll_no'") or die(mysqli_error());
+				$dup_query = $db->query("select * from exam_report where exam_id='$exam_id' and roll_no='$roll_no'") or die(mysqli_error($db));
 				$dup_cnt= mysqli_num_rows($dup_query);
 				if($dup_cnt < 1){
-					$db->query("INSERT INTO `exam_report`(`id`, `exam_id`, `roll_no`, `subject`, `marks_secured`, `total_marks`) VALUES ('','$exam_id','$roll_no','$subj','$crt_count','$tot_ques')") or die(mysqli_error());
+					$db->query("INSERT INTO `exam_report`(`id`, `exam_id`, `roll_no`, `subject`, `marks_secured`, `total_marks`) VALUES ('','$exam_id','$roll_no','$subj','$crt_count','$tot_ques')") or die(mysqli_error($db));
 				}
 			
 			?>
@@ -80,7 +80,7 @@ if(isset($_SESSION['roll_no'])){
                     <div class="row m10">
                     	 <?php
                             $i = 1;
-                            $ques = $db->query("select * from questions inner join stud_ans on questions.id=stud_ans.ques_id where questions.exam_id='$exam_id' GROUP BY questions.id") or die(mysqli_error()); 
+                            $ques = $db->query("select * from questions inner join stud_ans on questions.id=stud_ans.ques_id where questions.exam_id='$exam_id' GROUP BY questions.id") or die(mysqli_error($db)); 
 							//echo "<pre />"; print_r(mysqli_fetch_assoc($ques)); die;
                             while($row = mysqli_fetch_assoc($ques)){ 
                                 $ques_id = $row['id'];

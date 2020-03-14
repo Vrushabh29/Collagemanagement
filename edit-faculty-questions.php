@@ -18,12 +18,12 @@ include('db.php');
 include('faculty_header.php'); 
 if(isset($_SESSION['email_id'])){
 	$email = $_SESSION['email_id'];
-	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$name = $row['name'];
 	
 	$id = $_GET['id'];
-	$query = $db->query("select * from questions where id='$id'") or die(mysqli_error());
+	$query = $db->query("select * from questions where id='$id'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);	//echo "<pre />"; print_r($row); die;
 	
 	if(isset($_POST['update_question'])){ //echo "<pre />"; print_r($_POST); die;
@@ -33,7 +33,7 @@ if(isset($_SESSION['email_id'])){
 		$ans3 = $_POST['ans_3'];
 		$ans4 = $_POST['ans_4'];
 		$correct_ans = $_POST['correct_ans'];
-		$query = $db->query("UPDATE `questions` SET `question`='$ques',`ans_1`='$ans1',`ans_2`='$ans2',`ans_3`='$ans3',`ans_4`='$ans4',`correct_ans`='$correct_ans' WHERE id='$id'") or die(mysqli_error);
+		$query = $db->query("UPDATE `questions` SET `question`='$ques',`ans_1`='$ans1',`ans_2`='$ans2',`ans_3`='$ans3',`ans_4`='$ans4',`correct_ans`='$correct_ans' WHERE id='$id'") or die(mysqli_error($db));
 		
 		if($query){
 		header('location:view-faculty-questions.php');

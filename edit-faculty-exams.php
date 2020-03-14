@@ -18,12 +18,12 @@ include('db.php');
 include('faculty_header.php'); 
 if(isset($_SESSION['email_id'])){
 	$email = $_SESSION['email_id'];
-	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$name = $row['name'];
 	
 	$id = $_GET['id'];
-	$query = $db->query("select * from exams where id='$id'") or die(mysqli_error());
+	$query = $db->query("select * from exams where id='$id'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);	//echo "<pre />"; print_r($row); die;
 	
 	if(isset($_POST['update_exam'])){ //echo "<pre />"; print_r($_POST); die;
@@ -31,7 +31,7 @@ if(isset($_SESSION['email_id'])){
 		$sem = $_POST['semester'];
 		$time_duration = $_POST['time_duration'];
 		$no_of_ques = $_POST['no_of_ques'];
-		$query = $db->query("UPDATE `exams` SET `branch`='$branch',`semester`='$sem',`time_duration`='$time_duration',`no_of_questions`='$no_of_ques',`uploaded_by`='$name' WHERE id='$id'") or die(mysqli_error);
+		$query = $db->query("UPDATE `exams` SET `branch`='$branch',`semester`='$sem',`time_duration`='$time_duration',`no_of_questions`='$no_of_ques',`uploaded_by`='$name' WHERE id='$id'") or die(mysqli_error($db));
 		
 		if($query){
 		header('location:view-faculty-exam.php');

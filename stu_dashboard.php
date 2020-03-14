@@ -18,7 +18,7 @@ include('db.php');
 include('stu_header.php'); 
 if(isset($_SESSION['roll_no'])){ 
 $roll = $_SESSION['roll_no'];
-	$query = $db->query("SELECT * FROM `student_register` WHERE roll_no='$roll'") or die(mysqli_error());
+	$query = $db->query("SELECT * FROM `student_register` WHERE roll_no='$roll'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$stu_name = $row['name'];
 ?>

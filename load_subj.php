@@ -4,7 +4,7 @@
 	$loadType=$_POST['loadType']; //echo $loadId;
 	$loadId=$_POST['loadId'];
 	
-	$sql = $db->query("select * from `stu_subjects` where stream='$loadId'") or die(mysqli_error());
+	$sql = $db->query("select * from `stu_subjects` where stream='$loadId'") or die(mysqli_error($db));
 	while($row = mysqli_fetch_assoc($sql)){
 		$HTML.="<option value='".$row['subject']."'>".$row['subject']."</option>";
 	}

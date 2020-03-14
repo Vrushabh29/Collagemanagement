@@ -26,7 +26,7 @@ include('header.php');
 		$clg_email_id = $_POST['clg_email_id'];
 		$pass = md5($_POST['faculty_pass']);
 		$branch = $_POST['branch'];
-		$query = $db->query("INSERT INTO `faculty_register`(`id`, `name`, `email_id`, `clg_mail_id`, `password`, `branch`) VALUES ('','$name','$email_id','$clg_email_id','$pass','$branch')") or die(mysqli_error());
+		$query = $db->query("INSERT INTO `faculty_register`(`id`, `name`, `email_id`, `clg_mail_id`, `password`, `branch`) VALUES ('','$name','$email_id','$clg_email_id','$pass','$branch')") or die(mysqli_error($db));
 		
 		if($query){
 			echo "<script>alert('Successfully Registered')</script>";

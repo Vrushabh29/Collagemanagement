@@ -20,7 +20,7 @@ session_start();
 	if (isset($_SESSION['u_name'])) {
 
 		$id = $_GET['id'];
-		$query = $db->query("select * from faculty_register where id='$id'") or die(mysqli_error());
+		$query = $db->query("select * from faculty_register where id='$id'") or die(mysqli_error($db));
 		$row = mysqli_fetch_assoc($query);	//echo "<pre />"; print_r($row); die;
 
 		if (isset($_POST['update'])) { //echo "<pre />"; print_r($_POST); die;
@@ -28,7 +28,7 @@ session_start();
 			$email = $_POST['email_id'];
 			$clg_email_id = $_POST['clg_email_id'];
 			$branch = $_POST['branch'];
-			$query = $db->query("UPDATE `faculty_register` SET `name`='$name',`email_id`='$email',`clg_mail_id`='$clg_email_id',`branch`='$branch' WHERE id='$id'") or die(mysqli_error());
+			$query = $db->query("UPDATE `faculty_register` SET `name`='$name',`email_id`='$email',`clg_mail_id`='$clg_email_id',`branch`='$branch' WHERE id='$id'") or die(mysqli_error($db));
 
 			if ($query) {
 				header('location:view-faculty.php');

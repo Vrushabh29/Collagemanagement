@@ -19,17 +19,17 @@ session_start();
     include('faculty_header.php');
     if (isset($_SESSION['email_id'])) {
         $email = $_SESSION['email_id'];
-        $query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+        $query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
         $row = mysqli_fetch_assoc($query);
         $name = $row['name'];
 
         $id = $_GET['id'];
-        $query = $db->query("select * from queries where id='$id'") or die(mysqli_error());
+        $query = $db->query("select * from queries where id='$id'") or die(mysqli_error($db));
         $row = mysqli_fetch_assoc($query);    //echo "<pre />"; print_r($row); die;
 
         if (isset($_POST['update_queries'])) { //echo "<pre />"; print_r($_POST); die;
             $solution = $_POST['solution'];
-            $query = $db->query("UPDATE `queries` SET `solution`=CONCAT('$solution,<br />',solution),`uploaded_by`=CONCAT('$name,<br />',uploaded_by) WHERE id='$id'") or die(mysqli_error);
+            $query = $db->query("UPDATE `queries` SET `solution`=CONCAT('$solution,<br />',solution),`uploaded_by`=CONCAT('$name,<br />',uploaded_by) WHERE id='$id'") or die(mysqli_error($db));
 
             if ($query) {
                 header('location:view-queries-complaints.php');

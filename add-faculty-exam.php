@@ -18,7 +18,7 @@ include('db.php');
 include('faculty_header.php'); 
 if(isset($_SESSION['email_id'])){
 	$email = $_SESSION['email_id'];
-	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$name = $row['name'];
 ?>
@@ -37,7 +37,7 @@ if(isset($_SESSION['email_id'])){
 		$subject = $_POST['subj_name'];
 		$time_duration = $_POST['time_duration'];
 		$no_of_ques = $_POST['no_of_ques'];
-		$query = $db->query("INSERT INTO `exams`(`id`, `branch`, `semester`, `subject`, `time_duration`, `no_of_questions`, `uploaded_by`) VALUES ('','$branch','$sem','$subject','$time_duration','$no_of_ques','$name')") or die(mysqli_error());
+		$query = $db->query("INSERT INTO `exams`(`id`, `branch`, `semester`, `subject`, `time_duration`, `no_of_questions`, `uploaded_by`) VALUES ('','$branch','$sem','$subject','$time_duration','$no_of_ques','$name')") or die(mysqli_error($db));
 		
 		if($query){
 			echo "<script>alert('Successfully Added Exam')</script>";

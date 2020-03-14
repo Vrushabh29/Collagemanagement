@@ -27,7 +27,7 @@ include('header.php');
 		$pass = md5($_POST['stu_pass']);
 		$branch = $_POST['branch'];
 		$semister = $_POST['sem'];
-		$query = $db->query("INSERT INTO `student_register`(`id`, `name`, `roll_no`, `email_id`, `password`, `branch`, `semister`) VALUES ('','$name','$roll_no','$email_id','$pass','$branch','$semister')") or die(mysqli_error());
+		$query = $db->query("INSERT INTO `student_register`(`id`, `name`, `roll_no`, `email_id`, `password`, `branch`, `semister`) VALUES ('','$name','$roll_no','$email_id','$pass','$branch','$semister')") or die(mysqli_error($db));
 		
 		if($query){
 			echo "<script>alert('Successfully Updated Students Details')</script>";

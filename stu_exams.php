@@ -53,7 +53,7 @@ $roll_no = $_SESSION['roll_no'];
           <div class="col-md-12 col-sm-12 col-xs-12">  
           	<?php
 				$i =1;
-				$sql = $db->query("select * from questions where exam_id='$exam_id'") or die(mysqli_error());
+				$sql = $db->query("select * from questions where exam_id='$exam_id'") or die(mysqli_error($db));
 				while($row = mysqli_fetch_assoc($sql)){
 					$ques_id = $row['id'];
 					$branch = $row['branch'];
@@ -91,7 +91,7 @@ $roll_no = $_SESSION['roll_no'];
 						//Submitting the exam values
 						if(isset($_POST['submit'])){
 							$crt_ans = $_POST['radio'.$ques_id];
-							$query = $db->query("INSERT INTO `stud_ans`(`ans_id`, `roll_no`, `subj`, `exam_id`, `ques_id`, `stud_ans`) VALUES ('','$roll_no','$subj','$exam_id','$ques_id','$crt_ans')") or die(mysqli_error());				
+							$query = $db->query("INSERT INTO `stud_ans`(`ans_id`, `roll_no`, `subj`, `exam_id`, `ques_id`, `stud_ans`) VALUES ('','$roll_no','$subj','$exam_id','$ques_id','$crt_ans')") or die(mysqli_error($db));				
 						}
 						$i++;}
 						if(isset($query)){

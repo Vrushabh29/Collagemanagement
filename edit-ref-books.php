@@ -20,7 +20,7 @@ session_start();
     if (isset($_SESSION['u_name'])) {
         $name = $_SESSION['u_name'];
         $id = $_GET['id'];
-        $query = $db->query("select * from books where id='$id'") or die(mysqli_error());
+        $query = $db->query("select * from books where id='$id'") or die(mysqli_error($db));
         $row = mysqli_fetch_assoc($query);    //echo "<pre />"; print_r($row); die;
 
         if (isset($_POST['update_book'])) { //echo "<pre />"; print_r($_POST); die;
@@ -32,9 +32,9 @@ session_start();
             $link = $_POST['add_link'];
             if ($file != '') {
                 move_uploaded_file($_FILES['add_book']['tmp_name'], 'uploads/' . $_FILES['add_book']['name']);
-                $db->query("UPDATE books set `add_book`='$file' where id='$id'") or die(mysqli_error());
+                $db->query("UPDATE books set `add_book`='$file' where id='$id'") or die(mysqli_error($db));
             }
-            $query = $db->query("UPDATE `books` SET `branch`='$branch', `semester`='$sem',`sub_name`='$sub',`book_name`='$book_name',`add_link`='$link',`uploaded_by`='$name' WHERE id='$id'") or die(mysqli_error);
+            $query = $db->query("UPDATE `books` SET `branch`='$branch', `semester`='$sem',`sub_name`='$sub',`book_name`='$book_name',`add_link`='$link',`uploaded_by`='$name' WHERE id='$id'") or die(mysqli_error($db));
 
             if ($query) {
                 header('location:ad-view-ref-books.php');

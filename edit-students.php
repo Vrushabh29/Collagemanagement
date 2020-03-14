@@ -20,7 +20,7 @@ session_start();
     if (isset($_SESSION['u_name'])) {
 
         $id = $_GET['id'];
-        $query = $db->query("select * from student_register where id='$id'") or die(mysqli_error());
+        $query = $db->query("select * from student_register where id='$id'") or die(mysqli_error($db));
         $row = mysqli_fetch_assoc($query);    //echo "<pre />"; print_r($row); die;
 
         if (isset($_POST['update'])) { //echo "<pre />"; print_r($_POST); die;
@@ -29,7 +29,7 @@ session_start();
             $email_id = $_POST['email_id'];
             $branch = $_POST['stream'];
             $sem = $_POST['semister'];
-            $query = $db->query("UPDATE `student_register` SET `name`='$name',`roll_no`='$roll_no',`email_id`='$email_id',`branch`='$branch',`semister`='$sem' WHERE id='$id'") or die(mysqli_error());
+            $query = $db->query("UPDATE `student_register` SET `name`='$name',`roll_no`='$roll_no',`email_id`='$email_id',`branch`='$branch',`semister`='$sem' WHERE id='$id'") or die(mysqli_error($db));
 
             if ($query) {
                 header('location:view-students.php');

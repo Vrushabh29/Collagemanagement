@@ -19,14 +19,14 @@ session_start();
 	if(isset($_SESSION['u_name'])){
 		
 	$id = $_GET['id'];
-	$query = $db->query("select * from stu_subjects where id='$id'") or die(mysqli_error());
+	$query = $db->query("select * from stu_subjects where id='$id'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);	//echo "<pre />"; print_r($row); die;
 	
 	if(isset($_POST['update'])){ //echo "<pre />"; print_r($_POST); die;
 		$stream = $_POST['stream'];
 		$sem = $_POST['semister'];
 		$sub = $_POST['subject'];
-		$query = $db->query("UPDATE `stu_subjects` SET `stream`='$stream',`semister`='$sem',`subject`='$sub' WHERE id='$id'") or die(mysqli_error);
+		$query = $db->query("UPDATE `stu_subjects` SET `stream`='$stream',`semister`='$sem',`subject`='$sub' WHERE id='$id'") or die(mysqli_error($db));
 		
 		if($query){
 		header('location:ad-view-subjects.php');

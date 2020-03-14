@@ -37,7 +37,7 @@ session_start();
             if ($file != '') {
                 move_uploaded_file($_FILES['add_book']['tmp_name'], 'uploads/' . $_FILES['add_book']['name']);
             }
-            $query = $db->query("INSERT INTO `books`(`id`, `branch`, `semester`, `sub_name`, `book_name`, `add_book`, `add_link`, `uploaded_by`) VALUES ('','$branch','$sem','$subject_name','$book_name','$file','$link','$name')") or die(mysqli_error());
+            $query = $db->query("INSERT INTO `books`(`id`, `branch`, `semester`, `sub_name`, `book_name`, `add_book`, `add_link`, `uploaded_by`) VALUES ('','$branch','$sem','$subject_name','$book_name','$file','$link','$name')") or die(mysqli_error($db));
 
             if ($query) {
                 echo "<script>alert('Successfully Updated Books Details')</script>";

@@ -18,7 +18,7 @@ include('db.php');
 include('faculty_header.php'); 
 if(isset($_GET['id'])){
 	$exam_id = $_GET['id'];
-	$sql = $db->query("select * from exams where id='$exam_id'") or die(mysqli_error());		
+	$sql = $db->query("select * from exams where id='$exam_id'") or die(mysqli_error($db));		
 	$row = mysqli_fetch_assoc($sql);
 	$branch = $row['branch'];
 	$sem = $row['semester'];
@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
 }
 if(isset($_SESSION['email_id'])){
 	$email = $_SESSION['email_id'];
-	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error());
+	$query = $db->query("select * from faculty_register where email_id='$email'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$name = $row['name'];
 ?>
@@ -46,7 +46,7 @@ if(isset($_SESSION['email_id'])){
 			$ans3 = $_POST['ans_3'];
 			$ans4 = $_POST['ans_4'];
 			$correct_ans = $_POST['correct_ans'];
-		$query = $db->query("INSERT INTO `questions`(`id`, `exam_id`, `branch`, `semester`, `subject`, `question`, `ans_1`, `ans_2`, `ans_3`, `ans_4`, `correct_ans`) VALUES ('','$exam_id','$branch','$sem','$subj','$ques','$ans1','$ans2','$ans3','$ans4','$correct_ans')") or die(mysqli_error());
+		$query = $db->query("INSERT INTO `questions`(`id`, `exam_id`, `branch`, `semester`, `subject`, `question`, `ans_1`, `ans_2`, `ans_3`, `ans_4`, `correct_ans`) VALUES ('','$exam_id','$branch','$sem','$subj','$ques','$ans1','$ans2','$ans3','$ans4','$correct_ans')") or die(mysqli_error($db));
 		
 		if($query){
 			echo "<script>alert('Successfully Added Questions.....!')</script>";

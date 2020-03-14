@@ -18,7 +18,7 @@ include('db.php');
 include('stu_header.php'); 
 if(isset($_SESSION['roll_no'])){ 
 $roll_no = $_SESSION['roll_no'];
-	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error());
+	$query = $db->query("select * from student_register where roll_no='$roll_no'") or die(mysqli_error($db));
 	$row = mysqli_fetch_assoc($query);
 	$branch = $row['branch']; //echo $branch;
 	$sem = $row['semister']; //echo $sem;
@@ -36,7 +36,7 @@ $roll_no = $_SESSION['roll_no'];
         <div class="clearfix"></div>
           <div class="row m20_auto">
                 <?php
-					$sql = $db->query("select * from exams where branch='$branch' and semester='$sem'") or die(mysqli_error());
+					$sql = $db->query("select * from exams where branch='$branch' and semester='$sem'") or die(mysqli_error($db));
 					while($rows = mysqli_fetch_assoc($sql)){ $_SESSION['TIME'] = $rows['time_duration'];
 					$subj = $rows['subject'];
 				?>
@@ -51,7 +51,7 @@ $roll_no = $_SESSION['roll_no'];
                 </div>
                 <div class="h6_bold_font_1">DO NOT refresh the page.</div>
                 <?php
-					$cnt_query = $db->query("select * from stud_ans where roll_no='$roll_no' and subj='$subj'") or die(mysqli_error());
+					$cnt_query = $db->query("select * from stud_ans where roll_no='$roll_no' and subj='$subj'") or die(mysqli_error($db));
 					$count = mysqli_num_rows($cnt_query);
 				?>
                 <div class="asmts_btn_bottom"><a href="<?php if($count >= 1){ ?> javascript:alert('You have already attended for the exam') <?php } else {?> stu_exams.php?exam_id=<?php echo $rows['id'];}?>" class="cus_form_btn_1"> Start Test</a></div>
