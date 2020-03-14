@@ -1,4 +1,4 @@
 # Collagemanagement
 Collage Project
-Collage management in PHP
+Collage management system in PHP
 
